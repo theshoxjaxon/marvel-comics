@@ -6,7 +6,7 @@ import './style/style.scss';
 
 const marvelService = new MarvelServices();
 marvelService.getAllCharacters().then(res => res.data.results.forEach(element => {
-  console.log(element.name);
+  console.log(element);
 }))
 
 ReactDOM.render(
