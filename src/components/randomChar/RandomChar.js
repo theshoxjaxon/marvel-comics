@@ -6,26 +6,27 @@ import mjolnir from "../../resources/img/mjolnir.png";
 
 class RandomChar extends Component {
   constructor(props) {
-    super(props)
-    this.updateChar()
+    super(props);
+    this.updateChar();
   }
   state = {
-    name: null,
-    description: null,
-    thumbnail: null,
-    homepage: null,
-    wiki: null,
+    char: {},
   };
+
+  onCharLoaded = (char) => {
+    this.setState({ char });
+  };
+
   marvelService = new MarvelServices();
   updateChar = () => {
-    const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
-    this.marvelService.getCharacter(id).then((res) => {
-      this.setState(res);
-    });
+    const id = Math.floor(Math.random() * (1011400 - 1011000) + 1011000);
+    this.marvelService.getCharacter(id).then(this.onCharLoaded);
   };
 
   render() {
-    let { name, description, thumbnail, homepage, wiki } = this.state;
+    let {
+      char: { name, description, thumbnail, homepage, wiki },
+    } = this.state;
     return (
       <div className="randomchar">
         <div className="randomchar__block">
